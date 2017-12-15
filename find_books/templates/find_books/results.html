@@ -1,0 +1,60 @@
+{% extends 'find_books/header.html' %} {% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">BookPro</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="/query/" method="GET">
+      <input class="form-control mr-sm-2" type="search" placeholder="Name you favourite book!" name="query" style="width: 256px;">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h5>Showing results for: <a href="/query/?query={{ query }}">{{ query }}</a></h5><hr>
+            {% for i in data %}
+            {% if forloop.first %}
+                <div class="card border-dark">
+            {% else %}
+                <div class="card">
+            {% endif %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-thumbnail" src="{{ i.image }}" alt="Card image cap" height="300px" width="250px">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="{{ i.link }}">{{ i.title }}</a></h4>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ i.author }}</h6>
+                            <dl class="row">
+                                <dt class="col-sm-3">Price: </dt>
+                                <dd class="col-sm-9">₹ {{ i.price }}</dd>
+                                <dt class="col-sm-3">ISBN: </dt>
+                                <dd class="col-sm-9">{{ i.ISBN }}</dd>
+                                <dt class="col-sm-3">Provider: </dt>
+                                <dd class="col-sm-9">
+                                    <img src="{{ i.provider }}" height="50px" width="120px">
+                                </dd>
+                            </dl>
+                            <a class="btn btn-primary" href="{{ i.link }}" role="button">Buy</a>
+                            <a class="btn btn-success" href="{{ i.offer_link }}" role="button">Get Offers</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <h5>Recommendations: </h5>
+        </div>
+    </div>
+</div>
+{% endblock %}

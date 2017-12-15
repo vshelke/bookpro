@@ -1,0 +1,15 @@
+{% extends 'find_books/header.html' %} {% block body %}
+<div class="container">
+    <br>
+    <div  id="foobar" class="container text-center">
+        <img class="img-thumbnail" src="static/logo.png" style="width:586px;height:237px;">
+    </div>
+    <br>
+    <div class="text-center">
+        <form action="/query/" method="GET">
+            <input class="form-control form-control-lg text-center" type="search" placeholder="Name you favourite book!" name="query"><br>
+            <button type="submit" class="btn btn-warning btn-lg">Search!</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
