@@ -11,8 +11,8 @@ def infibeam(s):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
     i = soup.findAll("div", { "class" : " col-md-3 col-sm-6 col-xs-12 search-icon flex-item" })
-    with open('infibeam_data.json', 'w') as f:
-        json.dump(str(i), f, indent=4)
+    # with open('infibeam_data.json', 'w') as f:
+    #     json.dump(str(i), f, indent=4)
     if len(i) <= 0:
         return None
     comp = []

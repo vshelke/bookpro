@@ -16,8 +16,8 @@ def flipkart(s):
     r = requests.get(endpoint, params=params, headers=headers)
     data_dict = json.loads(r.text)
 
-    with open('flipkart_data.json', 'w') as f:
-        json.dump(data_dict, f, indent=4)
+    # with open('flipkart_data.json', 'w') as f:
+    #     json.dump(data_dict, f, indent=4)
 
     if len(data_dict['productInfoList']) <= 0:
         return None

@@ -33,8 +33,8 @@ def amazon(s):
     if 'Errors' in data_dict['ItemSearchResponse']['Items']['Request']:
         return None
 
-    with open('amazon_data.json', 'w') as f:
-        json.dump(data_dict, f, indent=4)
+    # with open('amazon_data.json', 'w') as f:
+    #     json.dump(data_dict, f, indent=4)
 
     data = data_dict['ItemSearchResponse']['Items']['Item']
     comp = []
