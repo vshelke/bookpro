@@ -1,0 +1,403 @@
+{
+    "ItemSearchResponse": {
+        "@xmlns": "http://webservices.amazon.com/AWSECommerceService/2011-08-01",
+        "OperationRequest": {
+            "HTTPHeaders": {
+                "Header": {
+                    "@Name": "UserAgent",
+                    "@Value": "python-requests/2.18.4"
+                }
+            },
+            "RequestId": "7b5883c9-2ad0-478e-9385-c65c2f886a75",
+            "Arguments": {
+                "Argument": [
+                    {
+                        "@Name": "AWSAccessKeyId",
+                        "@Value": "AKIAJKBJSCFX6V2ODHAA"
+                    },
+                    {
+                        "@Name": "AssociateTag",
+                        "@Value": "bookpro3301-21"
+                    },
+                    {
+                        "@Name": "Keywords",
+                        "@Value": "some things take time"
+                    },
+                    {
+                        "@Name": "Operation",
+                        "@Value": "ItemSearch"
+                    },
+                    {
+                        "@Name": "ResponseGroup",
+                        "@Value": "Images,ItemAttributes,Offers"
+                    },
+                    {
+                        "@Name": "SearchIndex",
+                        "@Value": "Books"
+                    },
+                    {
+                        "@Name": "Service",
+                        "@Value": "AWSECommerceService"
+                    },
+                    {
+                        "@Name": "Sort",
+                        "@Value": "relevancerank"
+                    },
+                    {
+                        "@Name": "Timestamp",
+                        "@Value": "2018-01-01T21:45:32Z"
+                    },
+                    {
+                        "@Name": "Signature",
+                        "@Value": "jB5n10TxAxHHcLxQMoB4NaLeRXbtmHNgYvMgiXNfO6U="
+                    }
+                ]
+            },
+            "RequestProcessingTime": "0.0950031390000000"
+        },
+        "Items": {
+            "Request": {
+                "IsValid": "True",
+                "ItemSearchRequest": {
+                    "Keywords": "some things take time",
+                    "ResponseGroup": [
+                        "Images",
+                        "ItemAttributes",
+                        "Offers"
+                    ],
+                    "SearchIndex": "Books",
+                    "Sort": "relevancerank"
+                }
+            },
+            "TotalResults": "2",
+            "TotalPages": "1",
+            "MoreSearchResultsUrl": "https://www.amazon.in/gp/search?linkCode=xm2&SubscriptionId=AKIAJKBJSCFX6V2ODHAA&keywords=some%20things%20take%20time&tag=bookpro3301-21&creative=165953&url=search-alias%3Dstripbooks&camp=2025",
+            "Item": [
+                {
+                    "ASIN": "0768515769",
+                    "DetailPageURL": "https://www.amazon.in/Some-Things-Dominie-Carousel-Readers/dp/0768515769?SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768515769",
+                    "ItemLinks": {
+                        "ItemLink": [
+                            {
+                                "Description": "Add To Wishlist",
+                                "URL": "https://www.amazon.in/gp/registry/wishlist/add-item.html?asin.0=0768515769&SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768515769"
+                            },
+                            {
+                                "Description": "Tell A Friend",
+                                "URL": "https://www.amazon.in/gp/pdp/taf/0768515769?SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768515769"
+                            },
+                            {
+                                "Description": "All Customer Reviews",
+                                "URL": "https://www.amazon.in/review/product/0768515769?SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768515769"
+                            },
+                            {
+                                "Description": "All Offers",
+                                "URL": "https://www.amazon.in/gp/offer-listing/0768515769?SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768515769"
+                            }
+                        ]
+                    },
+                    "SmallImage": {
+                        "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL._SL75_.jpg",
+                        "Height": {
+                            "@Units": "pixels",
+                            "#text": "75"
+                        },
+                        "Width": {
+                            "@Units": "pixels",
+                            "#text": "56"
+                        }
+                    },
+                    "MediumImage": {
+                        "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL._SL160_.jpg",
+                        "Height": {
+                            "@Units": "pixels",
+                            "#text": "160"
+                        },
+                        "Width": {
+                            "@Units": "pixels",
+                            "#text": "120"
+                        }
+                    },
+                    "LargeImage": {
+                        "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL.jpg",
+                        "Height": {
+                            "@Units": "pixels",
+                            "#text": "500"
+                        },
+                        "Width": {
+                            "@Units": "pixels",
+                            "#text": "375"
+                        }
+                    },
+                    "ImageSets": {
+                        "ImageSet": {
+                            "@Category": "primary",
+                            "SwatchImage": {
+                                "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL._SL30_.jpg",
+                                "Height": {
+                                    "@Units": "pixels",
+                                    "#text": "30"
+                                },
+                                "Width": {
+                                    "@Units": "pixels",
+                                    "#text": "22"
+                                }
+                            },
+                            "SmallImage": {
+                                "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL._SL75_.jpg",
+                                "Height": {
+                                    "@Units": "pixels",
+                                    "#text": "75"
+                                },
+                                "Width": {
+                                    "@Units": "pixels",
+                                    "#text": "56"
+                                }
+                            },
+                            "ThumbnailImage": {
+                                "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL._SL75_.jpg",
+                                "Height": {
+                                    "@Units": "pixels",
+                                    "#text": "75"
+                                },
+                                "Width": {
+                                    "@Units": "pixels",
+                                    "#text": "56"
+                                }
+                            },
+                            "TinyImage": {
+                                "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL._SL110_.jpg",
+                                "Height": {
+                                    "@Units": "pixels",
+                                    "#text": "110"
+                                },
+                                "Width": {
+                                    "@Units": "pixels",
+                                    "#text": "82"
+                                }
+                            },
+                            "MediumImage": {
+                                "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL._SL160_.jpg",
+                                "Height": {
+                                    "@Units": "pixels",
+                                    "#text": "160"
+                                },
+                                "Width": {
+                                    "@Units": "pixels",
+                                    "#text": "120"
+                                }
+                            },
+                            "LargeImage": {
+                                "URL": "https://images-eu.ssl-images-amazon.com/images/I/51e52vergpL.jpg",
+                                "Height": {
+                                    "@Units": "pixels",
+                                    "#text": "500"
+                                },
+                                "Width": {
+                                    "@Units": "pixels",
+                                    "#text": "375"
+                                }
+                            }
+                        }
+                    },
+                    "ItemAttributes": {
+                        "Binding": "Hardcover",
+                        "Brand": "imusti",
+                        "Creator": {
+                            "@Role": "Compiler",
+                            "#text": "Dominie Elementary"
+                        },
+                        "EAN": "9780768515763",
+                        "EANList": {
+                            "EANListElement": "9780768515763"
+                        },
+                        "Feature": "Dominie Press",
+                        "Format": "Import",
+                        "ISBN": "0768515769",
+                        "ItemDimensions": {
+                            "Height": {
+                                "@Units": "hundredths-inches",
+                                "#text": "792"
+                            },
+                            "Length": {
+                                "@Units": "hundredths-inches",
+                                "#text": "622"
+                            },
+                            "Weight": {
+                                "@Units": "hundredths-pounds",
+                                "#text": "0"
+                            },
+                            "Width": {
+                                "@Units": "hundredths-inches",
+                                "#text": "52"
+                            }
+                        },
+                        "Label": "Dominie Press",
+                        "Languages": {
+                            "Language": [
+                                {
+                                    "Name": "English",
+                                    "Type": "Published"
+                                },
+                                {
+                                    "Name": "English",
+                                    "Type": "Original Language"
+                                },
+                                {
+                                    "Name": "English",
+                                    "Type": "Unknown"
+                                }
+                            ]
+                        },
+                        "Manufacturer": "Dominie Press",
+                        "NumberOfItems": "1",
+                        "PackageDimensions": {
+                            "Height": {
+                                "@Units": "hundredths-inches",
+                                "#text": "52"
+                            },
+                            "Length": {
+                                "@Units": "hundredths-inches",
+                                "#text": "792"
+                            },
+                            "Weight": {
+                                "@Units": "hundredths-pounds",
+                                "#text": "78"
+                            },
+                            "Width": {
+                                "@Units": "hundredths-inches",
+                                "#text": "622"
+                            }
+                        },
+                        "ProductGroup": "Book",
+                        "ProductTypeName": "ABIS_BOOK",
+                        "PublicationDate": "2004-10-14",
+                        "Publisher": "Dominie Press",
+                        "Studio": "Dominie Press",
+                        "Title": "Some Things Take Time 6pk (Dominie Carousel Readers)"
+                    },
+                    "OfferSummary": {
+                        "TotalNew": "0",
+                        "TotalUsed": "0",
+                        "TotalCollectible": "0",
+                        "TotalRefurbished": "0"
+                    },
+                    "Offers": {
+                        "TotalOffers": "0",
+                        "TotalOfferPages": "0",
+                        "MoreOffersUrl": "0"
+                    }
+                },
+                {
+                    "ASIN": "0768507294",
+                    "DetailPageURL": "https://www.amazon.in/Some-Things-Dominie-Carousel-Readers/dp/0768507294?SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768507294",
+                    "ItemLinks": {
+                        "ItemLink": [
+                            {
+                                "Description": "Add To Wishlist",
+                                "URL": "https://www.amazon.in/gp/registry/wishlist/add-item.html?asin.0=0768507294&SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768507294"
+                            },
+                            {
+                                "Description": "Tell A Friend",
+                                "URL": "https://www.amazon.in/gp/pdp/taf/0768507294?SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768507294"
+                            },
+                            {
+                                "Description": "All Customer Reviews",
+                                "URL": "https://www.amazon.in/review/product/0768507294?SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768507294"
+                            },
+                            {
+                                "Description": "All Offers",
+                                "URL": "https://www.amazon.in/gp/offer-listing/0768507294?SubscriptionId=AKIAJKBJSCFX6V2ODHAA&tag=bookpro3301-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0768507294"
+                            }
+                        ]
+                    },
+                    "ItemAttributes": {
+                        "Binding": "Paperback",
+                        "Creator": {
+                            "@Role": "Other Contributor",
+                            "#text": "Pearson School"
+                        },
+                        "EAN": "9780768507294",
+                        "EANList": {
+                            "EANListElement": "9780768507294"
+                        },
+                        "Format": "Import",
+                        "ISBN": "0768507294",
+                        "ItemDimensions": {
+                            "Height": {
+                                "@Units": "hundredths-inches",
+                                "#text": "0"
+                            },
+                            "Length": {
+                                "@Units": "hundredths-inches",
+                                "#text": "0"
+                            },
+                            "Weight": {
+                                "@Units": "hundredths-pounds",
+                                "#text": "0"
+                            },
+                            "Width": {
+                                "@Units": "hundredths-inches",
+                                "#text": "0"
+                            }
+                        },
+                        "Label": "Dominie Press",
+                        "Languages": {
+                            "Language": [
+                                {
+                                    "Name": "English",
+                                    "Type": "Published"
+                                },
+                                {
+                                    "Name": "English",
+                                    "Type": "Original Language"
+                                },
+                                {
+                                    "Name": "English",
+                                    "Type": "Unknown"
+                                }
+                            ]
+                        },
+                        "Manufacturer": "Dominie Press",
+                        "NumberOfItems": "1",
+                        "PackageDimensions": {
+                            "Height": {
+                                "@Units": "hundredths-inches",
+                                "#text": "75"
+                            },
+                            "Length": {
+                                "@Units": "hundredths-inches",
+                                "#text": "956"
+                            },
+                            "Weight": {
+                                "@Units": "hundredths-pounds",
+                                "#text": "111"
+                            },
+                            "Width": {
+                                "@Units": "hundredths-inches",
+                                "#text": "660"
+                            }
+                        },
+                        "ProductGroup": "Book",
+                        "ProductTypeName": "ABIS_BOOK",
+                        "PublicationDate": "2004-10-14",
+                        "Publisher": "Dominie Press",
+                        "Studio": "Dominie Press",
+                        "Title": "Some Things Take Time (Dominie Carousel Readers)"
+                    },
+                    "OfferSummary": {
+                        "TotalNew": "0",
+                        "TotalUsed": "0",
+                        "TotalCollectible": "0",
+                        "TotalRefurbished": "0"
+                    },
+                    "Offers": {
+                        "TotalOffers": "0",
+                        "TotalOfferPages": "0",
+                        "MoreOffersUrl": "0"
+                    }
+                }
+            ]
+        }
+    }
+}

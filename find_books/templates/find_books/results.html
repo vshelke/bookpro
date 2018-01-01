@@ -36,8 +36,8 @@
                             <dl class="row">
                                 <dt class="col-sm-3">Price: </dt>
                                 <dd class="col-sm-9">₹ {{ i.price }}</dd>
-                                <dt class="col-sm-3">ISBN: </dt>
-                                <dd class="col-sm-9">{{ i.ISBN }}</dd>
+                                <dt class="col-sm-3">Details: </dt>
+                                <dd class="col-sm-9">{{ i.ISBN|safe }}</dd>
                                 <dt class="col-sm-3">Provider: </dt>
                                 <dd class="col-sm-9">
                                     <img src="{{ i.provider }}" height="50px" width="120px">
