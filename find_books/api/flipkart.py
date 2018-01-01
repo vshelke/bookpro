@@ -38,7 +38,7 @@ def flipkart(s):
             link = base['productUrl'] if 'productUrl' in base else ''
             if 'imageUrls' in base:
                 image = base['imageUrls']['400x400'] if '400x400' in base['imageUrls'] else ''
-            if 'flipkartSpecialPrice' in base:
+            if 'flipkartSpecialPrice' in base and base['flipkartSpecialPrice']:
                 price = float(base['flipkartSpecialPrice']['amount']) if 'amount' in base['flipkartSpecialPrice'] else None
             if 'offers' in base:
                 offer_link = base['offers'] if len(base['offers']) > 0 else ''
