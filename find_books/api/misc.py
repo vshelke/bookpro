@@ -7,7 +7,7 @@ def check(element):
   return '' if element is None else element
 
 def infibeam(s):
-    url = 'https://www.infibeam.com/search?q=' + s + '&us=true&sort=relevance'
+    url = 'https://www.infibeam.com/search?q=' + s + ' book&us=true&sort=relevance'
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
     i = soup.findAll("div", { "class" : " col-md-3 col-sm-6 col-xs-12 search-icon flex-item" })

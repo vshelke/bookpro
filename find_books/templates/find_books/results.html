@@ -1,59 +1,78 @@
 {% extends 'find_books/header.html' %} {% block body %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">BookPro</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/">BookPro</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-    </ul>
-    <form class="form-inline my-2 my-lg-0" action="/query/" method="GET">
-      <input class="form-control mr-sm-2" type="search" placeholder="Name you favourite book!" name="query" style="width: 256px;">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/query/" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Name you favourite book!" name="query" style="width: 256px;">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
 </nav>
 <br>
 
 <div class="container">
+    <h6>Showing results for: <a href="/query/?query={{ query }}">{{ query }}</a></h6>
+    <hr>
+
     <div class="row">
-        <div class="col-md-8">
-            <h5>Showing results for: <a href="/query/?query={{ query }}">{{ query }}</a></h5><hr>
-            {% for i in data %}
-            {% if forloop.first %}
-                <div class="card border-dark">
-            {% else %}
-                <div class="card">
-            {% endif %}
-                <div class="row">
-                    <div class="col-md-4">
-                        <img class="img-thumbnail" src="{{ i.image }}" alt="Card image cap" height="300px" width="250px">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h4 class="card-title"><a href="{{ i.link }}">{{ i.title }}</a></h4>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ i.author }}</h6>
-                            <dl class="row">
-                                <dt class="col-sm-3">Price: </dt>
-                                <dd class="col-sm-9">₹ {{ i.price }}</dd>
-                                <dt class="col-sm-3">Details: </dt>
-                                <dd class="col-sm-9">{{ i.ISBN|safe }}</dd>
-                                <dt class="col-sm-3">Provider: </dt>
-                                <dd class="col-sm-9">
-                                    <img src="{{ i.provider }}" height="50px" width="120px">
-                                </dd>
-                            </dl>
-                            <a class="btn btn-primary" href="{{ i.link }}" role="button">Buy</a>
-                            <a class="btn btn-success" href="{{ i.offer_link }}" role="button">Get Offers</a>
+        {% for i in all %}
+        <div class="col">
+            <br> {% if i.offer_link %}
+            <div class="card border-success text-center" style="width:10rem">
+                {% else %}
+                <div class="card text-center" style="width:10rem">
+                    {% endif %}
+                    <a href="#" data-toggle="modal" data-target="#item{{forloop.counter}}">
+                    <img class="card-img-top" src="{{ i.image }}" alt="book" height="250px">
+                </a>
+
+                    <div class="modal fade" id="item{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img class="img-thumbnail" src="{{ i.image }}" height="300px" width="250px">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4 id="exampleModalLongTitle">{{i.title}}</h4>
+                                            <h5 class="text-muted">{{ i.author }}</h5>
+
+                                            <dl class="row">
+                                                <dt class="col-sm-3">Price: </dt>
+                                                <dd class="col-sm-9">₹ {{ i.price }}</dd>
+                                                <dt class="col-sm-3">Details: </dt>
+                                                <dd class="col-sm-9">{{ i.ISBN|safe }}</dd>
+                                                <dt class="col-sm-3">Provider: </dt>
+                                                <dd class="col-sm-9">
+                                                    <img src="{{ i.provider }}" height="50px" width="120px">
+                                                </dd>
+                                            </dl>
+
+                                            <a class="btn btn-primary" href="{{ i.link }}" target="_blank" role="button">Get this Book!</a> {% if i.offer_link %}
+                                            <a class="btn btn-success" href="{{ i.offer_link }}" target="_blank" role="button">Offers</a> {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        Cost: ₹{{ i.price }}
+                    </h5>
+                        <a href="{{ i.link }}" target="_blank"><img src="{{ i.provider }}" height="30px" width="80px"></a>
                     </div>
                 </div>
             </div>
-            <br>
             {% endfor %}
-        </div>
-        <div class="col-md-4">
-            <h5>Recommendations: </h5>
+
         </div>
     </div>
 </div>

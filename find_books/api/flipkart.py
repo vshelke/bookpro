@@ -9,7 +9,7 @@ def flipkart(s):
         'Fk-Affiliate-Token': token,
     }
     params = {
-        'query': s,
+        'query': s + ' book',
         'resultCount': 10,
     }
     endpoint = 'https://affiliate-api.flipkart.net/affiliate/1.0/search.json'
