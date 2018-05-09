@@ -25,7 +25,7 @@ SECRET_KEY = 'e@z+e%n&5k14b9z3m-rf)q+fac@j)a@++b$4zx#si(u!)-lyok'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['436ac332.ngrok.io', 'localhost']
+ALLOWED_HOSTS = ['139.59.58.249', 'localhost', 'bookpro.xyz']
 
 
 # Application definition
