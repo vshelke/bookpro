@@ -16,12 +16,14 @@ def amazon(s):
         'SearchIndex': 'Books',
         'Service': 'AWSECommerceService',
         #'Sort': 'relevancerank',
-        'Timestamp': datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'Timestamp': '2017-12-27T02:20:19Z'#datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%dT%H:%M:%SZ'),
     }
     canonical_querystring = urllib.parse.urlencode(payload).replace('+', '%20')
     string_to_sign = "GET\n" + endpoint + "\n" + uri + "\n" + canonical_querystring
+    print (string_to_sign)
     dig = hmac.new( bytes(secret_key,'ascii'), msg=bytes(string_to_sign, 'ascii'), digestmod=sha256)
     sig = base64.b64encode(dig.digest())
+    print (sig)
     payload['Signature'] = sig
     r = requests.get("http://" + endpoint + uri, params=payload)
     data = xmltodict.parse(r.text)['ItemSearchResponse']['Items']['Item']
@@ -41,3 +43,9 @@ def amazon(s):
         'provider': 'https://images-na.ssl-images-amazon.com/images/G/01/SellerCentral/legal/amazon-logo_transparent.png'
     }
     return comp
+
+if __name__ == "__main__":
+        amazon("masala")
+
+
+
