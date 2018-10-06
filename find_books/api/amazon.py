@@ -4,8 +4,8 @@ import time, datetime, base64, hmac, requests, urllib, xmltodict, json
 import collections
 
 def amazon(s):
-    access_key_id = 'AKIAJKBJSCFX6V2ODHAA'
-    secret_key = "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"
+    access_key_id = ''
+    secret_key = ''
     endpoint = "webservices.amazon.in"
     uri = "/onca/xml"
     payload = collections.OrderedDict(
