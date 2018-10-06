@@ -1,9 +1,9 @@
 import requests, json
-
+from config import FlipkartConfig
 
 def flipkart(s):
-    token = ''
-    aff_id = 'bookpro3301'
+    token = FlipkartConfig.token
+    aff_id = FlipkartConfig.aff_id
     headers = {
         'Fk-Affiliate-Id': aff_id,
         'Fk-Affiliate-Token': token,
@@ -12,7 +12,7 @@ def flipkart(s):
         'query': s + ' book',
         'resultCount': 10,
     }
-    endpoint = 'https://affiliate-api.flipkart.net/affiliate/1.0/search.json'
+    endpoint = FlipkartConfig.endpoint
     r = requests.get(endpoint, params=params, headers=headers)
     data_dict = json.loads(r.text)
 
