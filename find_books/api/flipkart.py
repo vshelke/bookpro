@@ -2,7 +2,7 @@ import requests, json
 
 
 def flipkart(s):
-    token = '04f324321327484e85658ec6c396993b'
+    token = ''
     aff_id = 'bookpro3301'
     headers = {
         'Fk-Affiliate-Id': aff_id,
