@@ -17,7 +17,7 @@ Book Shopping comparision system!!
 
 ```docker build -t bookpro .```
 
-```docker run -it -p 8080:8080 bookpro```
+```docker run -it -v $(pwd)/bookpro:/app -p 8080:8080 bookpro```
 
 # Contributing
 
