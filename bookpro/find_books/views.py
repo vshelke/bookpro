@@ -17,7 +17,7 @@ def index(request):
     return render(request, 'find_books/index.html')
 
 def query(request):
-    q = request.GET['query']
+    q = request.GET['q']
     amazon_item = amazon.amazon(q)
     flipkart_item = flipkart.flipkart(q)
     infibeam_item = misc.infibeam(q)

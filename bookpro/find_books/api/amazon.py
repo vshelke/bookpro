@@ -1,12 +1,12 @@
 from hashlib import sha256
 from bs4 import BeautifulSoup
 import time, datetime, base64, hmac, requests, urllib, xmltodict, json
-import collections
-
+import collections 
+from config import AmazonConfig
 def amazon(s):
-    access_key_id = 'AKIAJKBJSCFX6V2ODHAA'
-    secret_key = "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"
-    endpoint = "webservices.amazon.in"
+    access_key_id = AmazonConfig.access_key_id
+    secret_key = AmazonConfig.secret_key
+    endpoint = AmazonConfig.endpoint
     uri = "/onca/xml"
     payload = collections.OrderedDict(
     [('AWSAccessKeyId', access_key_id),
@@ -21,10 +21,8 @@ def amazon(s):
     ])
     canonical_querystring = urllib.parse.urlencode(payload).replace('+', '%20')
     string_to_sign = "GET\n" + endpoint + "\n" + uri + "\n" + canonical_querystring
-    print (string_to_sign)
     dig = hmac.new( bytes(secret_key,'ascii'), msg=bytes(string_to_sign, 'ascii'), digestmod=sha256)
     sig = base64.b64encode(dig.digest())
-    print (sig)
     payload['Signature'] = sig
     r = requests.get("http://" + endpoint + uri, params=payload)
     data_dict = xmltodict.parse(r.text)
