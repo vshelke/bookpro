@@ -7,8 +7,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="/query/" method="GET">
-            <input class="form-control mr-sm-2" type="search" placeholder="Name you favourite book!" name="query" style="width: 256px;">
+        <form class="form-inline my-2 my-lg-0" action="/search/" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Name you favourite book!" name="q" style="width: 256px;">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
@@ -16,7 +16,7 @@
 <br>
 
 <div class="container">
-    <h6>Showing results for: <a href="/query/?query={{ query }}">{{ query }}</a></h6>
+    <h6>Showing results for: <a href="/search/?q={{ query }}">{{ query }}</a></h6>
     <hr>
 
     <div class="row">

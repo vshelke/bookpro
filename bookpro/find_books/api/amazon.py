@@ -21,10 +21,8 @@ def amazon(s):
     ])
     canonical_querystring = urllib.parse.urlencode(payload).replace('+', '%20')
     string_to_sign = "GET\n" + endpoint + "\n" + uri + "\n" + canonical_querystring
-    print (string_to_sign)
     dig = hmac.new( bytes(secret_key,'ascii'), msg=bytes(string_to_sign, 'ascii'), digestmod=sha256)
     sig = base64.b64encode(dig.digest())
-    print (sig)
     payload['Signature'] = sig
     r = requests.get("http://" + endpoint + uri, params=payload)
     data_dict = xmltodict.parse(r.text)

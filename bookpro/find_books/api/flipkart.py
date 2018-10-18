@@ -15,14 +15,13 @@ def flipkart(s):
     endpoint = FlipkartConfig.endpoint
     r = requests.get(endpoint, params=params, headers=headers)
     data_dict = json.loads(r.text)
-
     # with open('flipkart_data.json', 'w') as f:
     #     json.dump(data_dict, f, indent=4)
 
-    if len(data_dict['productInfoList']) <= 0:
+    if len(data_dict['products']) <= 0:
         return None
 
-    data = data_dict['productInfoList']
+    data = data_dict['products']
     comp = []
     for product in data:
         title = ''
