@@ -3,21 +3,29 @@
 
 Book Shopping comparision system!!
 
-# Develop locally
+# Develop locally using a virtual environment
 
-```cd bookpro/```
-
-```pip install -r requirements.txt```
-
-```./manage.py runserver 8080```
+```shell
+$ git clone git@github.com:vshelke/bookpro.git
+$ virtualenv -p python3 venv
+$ source venv/bin/activate
+$ cd bookpro
+$ pip3 install -r requirements.txt
+$ ./manage.py makemigrations
+$ ./manage.py migrate
+$ ./manage.py collectstatic
+$ ./manage.py runserver 8080
+```
 
 # Develop with Docker
 
-```cd bookpro/```
+```shell
+$ cd bookpro/
+$ docker build -t bookpro .
+$ docker run -it -v $(pwd)/bookpro:/app -p 8080:8080 bookpro
+```
 
-```docker build -t bookpro .```
-
-```docker run -it -v $(pwd)/bookpro:/app -p 8080:8080 bookpro```
+Now browse to `localhost:8080` and see the app.
 
 # Contributing
 
