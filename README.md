@@ -11,6 +11,14 @@ Book Shopping comparision system!!
 
 ```./manage.py runserver 8080```
 
+# Develop with Docker
+
+```cd bookpro/```
+
+```docker build -t bookpro .```
+
+```docker run -it -v $(pwd)/bookpro:/app -p 8080:8080 bookpro```
+
 # Contributing
 
 * add more integrations for different e-commerce websites.
