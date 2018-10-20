@@ -1,8 +1,10 @@
-from hashlib import sha256
+import collections, time, datetime, base64, hmac, requests, urllib, xmltodict, json
 from bs4 import BeautifulSoup
-import time, datetime, base64, hmac, requests, urllib, xmltodict, json
-import collections 
+from hashlib import sha256
+
 from config import AmazonConfig
+
+
 def amazon(s):
     access_key_id = AmazonConfig.access_key_id
     secret_key = AmazonConfig.secret_key
