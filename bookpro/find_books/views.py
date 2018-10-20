@@ -1,6 +1,9 @@
+import time
 from django.shortcuts import render
+from find_books.integrations.amazon import Amazon
+from find_books.integrations.flipkart import Flipkart
+from find_books.integrations.infibeam import Infibeam
 
-from find_books.api import amazon, flipkart, misc
 
 def validate_price(items=None):
     if items:
@@ -18,27 +21,20 @@ def index(request):
     return render(request, 'find_books/index.html')
 
 def query(request):
+    start = time.time()
     q = request.GET.get('q')
-    amazon_item = amazon.amazon(q)
-    flipkart_item = flipkart.flipkart(q)
-    infibeam_item = misc.infibeam(q)
-    # sapna_item = misc.sapnaonline(q)
-    # #booksmela_item = booksmela(q)
+    threads = [Amazon(q), Flipkart(q), Infibeam(q)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
     all_items = []
     relevant = []
-    if validate_price(amazon_item):
-        all_items += amazon_item
-        relevant += amazon_item[:2]
-
-    if validate_price(flipkart_item):
-        all_items += flipkart_item
-        relevant += flipkart_item[:2]
-
-    if validate_price(infibeam_item):
-        all_items += infibeam_item
-        relevant += infibeam_item[:2]
-
+    for thread in threads:
+        if validate_price(thread.items):
+            all_items.extend(thread.items)
+            relevant.extend(thread.items[:2])
     all_items = sort_price(all_items)
     relevant = sort_price(relevant)
-
+    print (q + " = " + str(time.time() - start))
     return render(request, 'find_books/results.html', {'all': all_items, 'relevant': relevant, 'query': q})
