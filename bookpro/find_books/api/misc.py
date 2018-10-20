@@ -1,10 +1,11 @@
-from hashlib import sha256
-from bs4 import BeautifulSoup
 import time, datetime, base64, hmac, requests, urllib, xmltodict, json
+from bs4 import BeautifulSoup
+from hashlib import sha256
 
 
 def check(element):
   return '' if element is None else element
+
 
 def infibeam(s):
     url = 'https://www.infibeam.com/search?q=' + s + ' book&us=true&sort=relevance'
@@ -49,6 +50,7 @@ def infibeam(s):
         })
     return comp
 
+  
 def sapnaonline(s):
     url = 'https://www.sapnaonline.com/general-search?searchkey=' + s
     r = requests.get(url)
