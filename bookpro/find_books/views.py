@@ -1,7 +1,8 @@
 from django.shortcuts import render
+
 from find_books.api import amazon, flipkart, misc
 
-def validate_price(items):
+def validate_price(items=None):
     if items:
         for item in items:
             if item['price']:
@@ -17,7 +18,7 @@ def index(request):
     return render(request, 'find_books/index.html')
 
 def query(request):
-    q = request.GET['q']
+    q = request.GET.get('q')
     amazon_item = amazon.amazon(q)
     flipkart_item = flipkart.flipkart(q)
     infibeam_item = misc.infibeam(q)
