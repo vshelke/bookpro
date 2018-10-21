@@ -1,5 +1,5 @@
 # BookPro
-[ ![Codeship Status for vshelke/bookpro](https://app.codeship.com/projects/7d556770-b50b-0136-511a-46765852e6b0/status?branch=master)](https://app.codeship.com/projects/311351)
+[ ![Codeship Status for vshelke/bookpro](https://app.codeship.com/projects/7d556770-b50b-0136-511a-46765852e6b0/status?branch=production)](https://app.codeship.com/projects/311351)
 
 [BookPro](https://book-pro.herokuapp.com/) is a price comparision tool for books on multiple e-commerce websites. It helps you get the best deals for your favourite books right away.
 
@@ -32,4 +32,3 @@ Now checkout the app at [http://localhost:8080](http://localhost:8080).
 
 Check out our [contributing guide](https://github.com/vshelke/bookpro/blob/master/CONTRIBUTING.md) for more details.
 
-## License
