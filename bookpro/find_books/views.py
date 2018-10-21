@@ -1,32 +1,28 @@
-from django.shortcuts import render
-
-# Create your views here.
 import time
+import json
+import logging
 from django.shortcuts import render
-from find_books.integrations.amazon import Amazon
-from find_books.integrations.flipkart import Flipkart
-from find_books.integrations.infibeam import Infibeam
+from find_books.integrations import Amazon, Flipkart, Infibeam
+
+_LOGGER = logging.getLogger(__name__)
 
 
-def validate_price(items=None):
-    if items:
-        for item in items:
-            if item['price']:
-                continue
-            else:
-                items.remove(item)
-    return items
+def validate_price(items=[]):
+    validated = []
+    for item in items:
+        if not item['price'] == None and isinstance(item['price'], float):
+            validated.append(item)
+    return validated
 
-def sort_price(items):
-    return sorted(items, key=lambda k: k['price'])
 
 def index(request):
     return render(request, 'find_books/index.html')
 
-def query(request):
+
+def search(request):
     start = time.time()
-    q = request.GET.get('q')
-    threads = [Amazon(q), Flipkart(q), Infibeam(q)]
+    query = request.GET.get('q')
+    threads = [Amazon(query), Flipkart(query), Infibeam(query)]
     for thread in threads:
         thread.start()
     for thread in threads:
@@ -34,10 +30,11 @@ def query(request):
     all_items = []
     relevant = []
     for thread in threads:
-        if validate_price(thread.items):
-            all_items.extend(thread.items)
-            relevant.extend(thread.items[:2])
-    all_items = sort_price(all_items)
-    relevant = sort_price(relevant)
-    print (q + " = " + str(time.time() - start))
-    return render(request, 'find_books/results.html', {'all': all_items, 'relevant': relevant, 'query': q})
+        items = validate_price(thread.items)
+        if items:
+            all_items.extend(items)
+            relevant.extend(items[:2])
+    all_items = sorted(all_items, key=lambda k: k['price'])
+    relevant = sorted(relevant, key=lambda k: k['price'])
+    _LOGGER.debug("Query: (" + query + ") took (" + str(time.time() - start) + ") secs")
+    return render(request, 'find_books/results.html', {'all': all_items, 'relevant': relevant, 'query': query})

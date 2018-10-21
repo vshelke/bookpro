@@ -1,5 +1,11 @@
-import collections, time, datetime, base64, hmac, requests, urllib, xmltodict, json
-from bs4 import BeautifulSoup
+import collections
+import time
+import datetime
+import base64
+import hmac
+import requests
+import urllib
+import xmltodict
 from hashlib import sha256
 from config import AmazonConfig
 from threading import Thread
@@ -16,7 +22,7 @@ class Amazon(Thread):
         self.uri = "/onca/xml"
 
     def get_payload(self):
-        payload = collections.OrderedDict([   
+        payload = collections.OrderedDict([
             ('AWSAccessKeyId', self.access_key_id),
             ('AssociateTag', 'bookpro3301-21'),
             ('Keywords', self.query),
@@ -25,58 +31,58 @@ class Amazon(Thread):
             ('SearchIndex', 'Books'),
             ('Service', 'AWSECommerceService'),
             ('Sort', 'relevancerank'),
-            ('Timestamp', datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%dT%H:%M:%SZ')),
+            ('Timestamp', datetime.datetime.fromtimestamp(
+                time.time()).strftime('%Y-%m-%dT%H:%M:%SZ')),
         ])
-        canonical_querystring = urllib.parse.urlencode(payload).replace('+', '%20')
-        string_to_sign = "GET\n" + self.endpoint + "\n" + self.uri + "\n" + canonical_querystring
-        dig = hmac.new( bytes(self.secret_key,'ascii'), msg=bytes(string_to_sign, 'ascii'), digestmod=sha256)
+        canonical_querystring = urllib.parse.urlencode(
+            payload).replace('+', '%20')
+        string_to_sign = "GET\n" + self.endpoint + \
+            "\n" + self.uri + "\n" + canonical_querystring
+        dig = hmac.new(bytes(self.secret_key, 'ascii'), msg=bytes(
+            string_to_sign, 'ascii'), digestmod=sha256)
         sig = base64.b64encode(dig.digest())
         payload['Signature'] = sig
         return payload
+
+    def parse_product(self, product):
+        data = {
+            'title': '',
+            'author': '',
+            'offer_link': '',
+            'link': product.get('DetailPageURL', ''),
+            'image': '',
+            'price': None,
+            'ISBN': '',
+            'provider': 'https://images-na.ssl-images-amazon.com/images/G/01/SellerCentral/legal/amazon-logo_transparent.png'
+        }
+        item = product.get('ItemAttributes', False)
+        offers = product.get('Offers', '')
+        image = product.get('LargeImage', '')
+        summary = product.get('OfferSummary', '')
+        if item:
+            data['title'] = item.get('Title', '')
+            data['author'] = item.get('Author', '')
+            if data['author'] and isinstance(data['author'], list):
+                data['author'] = ', '.join(data['author'])
+            data['ISBN'] = item.get('ISBN', '')
+        if offers:
+            data['offer_link'] = offers.get('MoreOffersUrl', '')
+        if image:
+            data['image'] = image.get('URL', '')
+        if summary and summary.get('LowestNewPrice', False):
+            if summary['LowestNewPrice'].get('FormattedPrice', False):
+                data['price'] = float(summary['LowestNewPrice']
+                                      ['FormattedPrice'][4:].replace(',', ''))
+        return data
 
     def run(self):
         payload = self.get_payload()
         r = requests.get("http://" + self.endpoint + self.uri, params=payload)
         data_dict = xmltodict.parse(r.text)
-
         if not 'ItemSearchResponse' in data_dict:
             return None
-
         if 'Errors' in data_dict['ItemSearchResponse']['Items']['Request']:
             return None
-
         products = data_dict['ItemSearchResponse']['Items']['Item']
         for product in products:
-            title = ''
-            author = ''
-            ISBN = ''
-            offer_link = ''
-            image = ''
-            price = None
-            link = ''
-            if 'ItemAttributes' in product:
-                item = product['ItemAttributes']
-                title = item['Title'] if 'Title' in item else ''
-                if 'Author' in item:
-                    if isinstance(item['Author'], list):
-                        author = ', '.join(item['Author'])
-                    else:
-                        author = item['Author']
-                ISBN = item['ISBN'] if 'ISBN' in item else ''
-            if 'Offers' in product:
-                offer_link = product['Offers']['MoreOffersUrl'] if 'MoreOffersUrl' in product['Offers'] else ''
-            if 'LargeImage' in product:
-                image = product['LargeImage']['URL'] if 'URL' in product['LargeImage'] else ''
-            if 'OfferSummary' in product:
-                if 'LowestNewPrice' in product['OfferSummary']:
-                    price = float(product['OfferSummary']['LowestNewPrice']['FormattedPrice'][4:].replace(',','')) if 'FormattedPrice' in product['OfferSummary']['LowestNewPrice'] else None
-            self.items.append({
-                'title': title,
-                'author': author,
-                'offer_link': offer_link,
-                'link': product['DetailPageURL'] if 'DetailPageURL' in product else '',
-                'image': image,
-                'price': price,
-                'ISBN': ISBN,
-                'provider': 'https://images-na.ssl-images-amazon.com/images/G/01/SellerCentral/legal/amazon-logo_transparent.png'
-            })
+            self.items.append(self.parse_product(product))
