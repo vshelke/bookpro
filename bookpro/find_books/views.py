@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 import time
 from django.shortcuts import render
 from find_books.integrations.amazon import Amazon
