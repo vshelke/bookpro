@@ -10,9 +10,27 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="/search/" method="GET">
-            <input class="form-control mr-sm-2" type="search" placeholder="Name you favourite book!" name="q" style="width: 256px;">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <form class="form my-2 my-lg-0" action="/search/" method="GET">
+          <div class="form-row">
+            <div class="form-group col">
+              <input class="form-control mr-sm-2" type="search" placeholder="Name you favourite book!" name="q" style="width: 256px;">
+            </div>
+            <div class="form-group col">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+          </div>
+          <div class="form-row align-items-center">
+            <label id="minPriceLabel" class="col-form-label col" for="minPrice">Min. Price:</label>
+            <div class="col">
+              <input id="minPrice" name="minPrice" class="form-control-range" type="range" value="0" min="0" max="5000">
+            </div>
+          </div>
+          <div class="form-row align-items-center">
+            <label id="maxPriceLabel" class="col-form-label col" for="maxPrice">Max. Price:</label>
+            <div class="col">
+              <input id="maxPrice" name="maxPrice" class="form-control-range" type="range" value="5000" min="0" max="5000">
+            </div>
+          </div>
         </form>
     </div>
 </nav>
@@ -82,4 +100,36 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+var minPriceRangeElem = document.getElementById('minPrice');
+var maxPriceRangeElem = document.getElementById('maxPrice');
+var minPriceLabel = document.getElementById('minPriceLabel');
+var maxPriceLabel = document.getElementById('maxPriceLabel');
+
+minPriceRangeElem.value = "0";
+maxPriceRangeElem.value = "5000";
+minPriceLabel.innerHTML = 'Min. Price ₹' + minPriceRangeElem.value;
+maxPriceLabel.innerHTML = 'Max. Price ₹' + maxPriceRangeElem.value;
+
+minPriceRangeElem.addEventListener('change', (ev) => {
+  var minPrice = Number(minPriceRangeElem.value);
+  var maxPrice = Number(maxPriceRangeElem.value);
+  if (minPrice > maxPrice) {
+    minPriceRangeElem.value = maxPriceRangeElem.value;
+  }
+  minPriceLabel.innerHTML = 'Min. Price ₹' + minPriceRangeElem.value;
+});
+
+maxPriceRangeElem.addEventListener('change', (ev) => {
+  var minPrice = Number(minPriceRangeElem.value);
+  var maxPrice = Number(maxPriceRangeElem.value);
+  if (minPrice > maxPrice) {
+    maxPriceRangeElem.value = minPriceRangeElem.value;
+  }
+  maxPriceLabel.innerHTML = 'Max. Price ₹' + maxPriceRangeElem.value;
+});
+</script>
 {% endblock %}
