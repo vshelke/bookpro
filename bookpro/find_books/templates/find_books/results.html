@@ -22,13 +22,13 @@
           <div class="form-row align-items-center">
             <label id="minPriceLabel" class="col-form-label col" for="minPrice">Min. Price:</label>
             <div class="col">
-              <input id="minPrice" name="minPrice" class="form-control-range" type="range" value="0" min="0" max="5000">
+              <input id="minPrice" name="min_price" class="form-control-range" type="range" value="{{ min_price }}" min="0" max="5000">
             </div>
           </div>
           <div class="form-row align-items-center">
             <label id="maxPriceLabel" class="col-form-label col" for="maxPrice">Max. Price:</label>
             <div class="col">
-              <input id="maxPrice" name="maxPrice" class="form-control-range" type="range" value="5000" min="0" max="5000">
+              <input id="maxPrice" name="max_price" class="form-control-range" type="range" value="{{ max_price }}" min="0" max="5000">
             </div>
           </div>
         </form>
@@ -37,7 +37,7 @@
 <br>
 
 <div class="container">
-    <h6>Showing results for: <a href="/search/?q={{ query }}">{{ query }}</a></h6>
+  <h6>Showing results for: <a href="/search/?q={{ query }}&min_price={{ min_price }}&max_price={{ max_price }}">{{ query }}</a></h6>
     <hr>
 
     <div class="row">
@@ -109,10 +109,8 @@ var maxPriceRangeElem = document.getElementById('maxPrice');
 var minPriceLabel = document.getElementById('minPriceLabel');
 var maxPriceLabel = document.getElementById('maxPriceLabel');
 
-minPriceRangeElem.value = "0";
-maxPriceRangeElem.value = "5000";
-minPriceLabel.innerHTML = 'Min. Price ₹' + minPriceRangeElem.value;
-maxPriceLabel.innerHTML = 'Max. Price ₹' + maxPriceRangeElem.value;
+minPriceLabel.innerHTML = 'Min. Price ₹' + minPriceRangeElem.value + ':';
+maxPriceLabel.innerHTML = 'Max. Price ₹' + maxPriceRangeElem.value + ':';
 
 minPriceRangeElem.addEventListener('change', (ev) => {
   var minPrice = Number(minPriceRangeElem.value);
