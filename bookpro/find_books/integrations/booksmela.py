@@ -38,10 +38,12 @@ class BooksMela(Thread):
         except:
             data['price'] = None
         try:
-            data['ISBN'] = link.split('-')[-1]
+            if data['link'].split('-')[-1].isdigit():
+                data['ISBN'] = data['link'].split('-')[-1]
+            else:
+                raise Exception('No isbn')
         except:
-            data['ISBN'] = None
-        print(data)
+            data['ISBN'] = ''
         return data
 
     def run(self):
