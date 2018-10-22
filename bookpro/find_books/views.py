@@ -15,7 +15,7 @@ def validate_price(items=[]):
     return validated
 
 
-def filter_price(items, min_price=0, max_price=5000):
+def filter_price(items, min_price=0, max_price=5000000):
     filtered = []
     for item in items:
         if min_price <= item['price'] and item['price'] <= max_price:
@@ -40,7 +40,7 @@ def search(request):
     if max_price:
         max_price = float(max_price)
     else:
-        max_price = 5000
+        max_price = 100000
 
     threads = [Amazon(query), Flipkart(query), Infibeam(query), BooksMela(query)]
     for thread in threads:
