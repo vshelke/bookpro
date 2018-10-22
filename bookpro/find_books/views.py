@@ -2,7 +2,7 @@ import time
 import json
 import logging
 from django.shortcuts import render
-from find_books.integrations import Amazon, Flipkart, Infibeam
+from find_books.integrations import Amazon, Flipkart, Infibeam, BooksMela
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ def search(request):
     else:
         max_price = 5000
 
-    threads = [Amazon(query), Flipkart(query), Infibeam(query)]
+    threads = [Amazon(query), Flipkart(query), Infibeam(query), BooksMela(query)]
     for thread in threads:
         thread.start()
     for thread in threads:
