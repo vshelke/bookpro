@@ -2,7 +2,7 @@ import time
 import json
 import logging
 from django.shortcuts import render
-from find_books.integrations import Amazon, Flipkart, Infibeam
+from find_books.integrations import Amazon, Flipkart, Infibeam, BooksMela
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -22,7 +22,7 @@ def index(request):
 def search(request):
     start = time.time()
     query = request.GET.get('q')
-    threads = [Amazon(query), Flipkart(query), Infibeam(query)]
+    threads = [Amazon(query), Flipkart(query), Infibeam(query), BooksMela(query)]
     for thread in threads:
         thread.start()
     for thread in threads:
