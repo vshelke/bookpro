@@ -22,8 +22,7 @@ $ ./manage.py runserver 8080
 ### Develop using Docker
 
 ```shell
-$ docker build -t bookpro .
-$ docker run -it -v $(pwd)/bookpro:/app -p 8080:8080 bookpro
+$ docker-compose up
 ```
 
 Now checkout the app at [http://localhost:8080](http://localhost:8080).
