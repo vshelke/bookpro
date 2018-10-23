@@ -22,7 +22,7 @@ $ ./manage.py runserver 8080
 ### Develop using Docker
 
 ```shell
-$ docker-compose up
+$ docker-compose up --build
 ```
 
 Now checkout the app at [http://localhost:8080](http://localhost:8080).
