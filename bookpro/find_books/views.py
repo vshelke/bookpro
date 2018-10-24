@@ -66,6 +66,7 @@ def search(request):
             relevant.extend(items[:2])
     all_items = sorted(all_items, key=lambda k: k['price'])
     relevant = sorted(relevant, key=lambda k: k['price'])
+    all_items = [x for x in all_items if x not in relevant]
     _LOGGER.debug("Query: (" + query + ") took (" + str(time.time() - start) + ") secs")
     
     return render(request, 'find_books/results.html', {'all': all_items, 'relevant': relevant, 'query': query})
