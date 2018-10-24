@@ -1,5 +1,7 @@
-from python:3.6.6-slim
-add bookpro /app
-workdir /app
-run pip install -r requirements.txt 
-cmd ["./manage.py", "runserver", "0.0.0.0:8080"]
+FROM python:3.6.6-slim
+
+WORKDIR /app
+ADD ./bookpro/requirements.txt /app/requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+ADD bookpro/ /app
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]

@@ -1,8 +1,7 @@
-import time
-import json
 import logging
+import time
 from django.shortcuts import render
-from find_books.integrations import Amazon, Flipkart, Infibeam, BooksMela ,Bookswagon
+from find_books.integrations import Amazon, Flipkart, Infibeam, BooksMela ,Snapdeal,Bookswagon
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -53,7 +52,8 @@ def search(request):
 
     start = time.time()
     query = request.GET.get('q')
-    threads = [Amazon(query), Flipkart(query), Infibeam(query), BooksMela(query),Bookswagon(query)]
+    threads = [Amazon(query), Flipkart(query), Infibeam(query), BooksMela(query), Snapdeal(query),Bookswagon(query)]
+
     for thread in threads:
         thread.start()
     for thread in threads:
@@ -67,6 +67,7 @@ def search(request):
             relevant.extend(items[:2])
     all_items = sorted(all_items, key=lambda k: k['price'])
     relevant = sorted(relevant, key=lambda k: k['price'])
+    all_items = [x for x in all_items if x not in relevant]
     _LOGGER.debug("Query: (" + query + ") took (" + str(time.time() - start) + ") secs")
 
     return render(request, 'find_books/results.html', {'all': all_items, 'relevant': relevant, 'query': query})
