@@ -96,7 +96,6 @@ class Bookswagon(Thread):
         soup = BeautifulSoup(r.text, 'html.parser')
         products = soup.findAll(
             "div", {"class": "list-view-books"})
-        print(products)
         if len(products) <= 0:
             return None
         for product in products:
