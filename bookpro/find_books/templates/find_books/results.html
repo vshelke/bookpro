@@ -49,11 +49,11 @@
           {% else %}
           <div class="book-card card text-center" style="width:10rem">
           {% endif %}
-              <a href="#" data-toggle="modal" data-target="#item{{forloop.counter}}">
+              <a href="#" data-toggle="modal" data-target="#item{{ book.hash }}">
                   <img class="card-img-top" src="{{ book.image }}" alt="book" height="250px">
               </a>
 
-              <div class="modal fade" id="item{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+              <div class="modal fade" id="item{{ book.hash }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                   aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
@@ -116,11 +116,11 @@
             {% else %}
             <div class="book-card card text-center" style="width:10rem">
             {% endif %}
-                    <a href="#" data-toggle="modal" data-target="#item{{forloop.counter}}">
+                    <a href="#" data-toggle="modal" data-target="#item{{ book.hash }}">
                         <img class="card-img-top" src="{{ book.image }}" alt="book" height="250px">
                     </a>
 
-                    <div class="modal fade" id="item{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                    <div class="modal fade" id="item{{ book.hash }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                         aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
