@@ -22,13 +22,13 @@
           <div class="form-row align-items-center">
             <label id="minPriceLabel" class="col-form-label col" for="minPrice">Min. Price:</label>
             <div class="col">
-              <input id="minPrice" name="min_price" class="form-control-range" type="range" value="{{ min_price }}" min="0" max="100000">
+              <input id="minPriceInput" name="min_price" class="form-control-range" type="range" value="0" min="0" max="100000">
             </div>
           </div>
           <div class="form-row align-items-center">
             <label id="maxPriceLabel" class="col-form-label col" for="maxPrice">Max. Price:</label>
             <div class="col">
-              <input id="maxPrice" name="max_price" class="form-control-range" type="range" value="{{ max_price }}" min="0" max="100000">
+              <input id="maxPriceInput" name="max_price" class="form-control-range" type="range" value="100000" min="0" max="100000">
             </div>
           </div>
         </form>
@@ -37,17 +37,85 @@
 <br>
 
 <div class="container">
-  <h6>Showing results for: <a href="/search/?q={{ query }}&min_price={{ min_price }}&max_price={{ max_price }}">{{ query }}</a></h6>
-    <hr>
+  <h6>Showing results for: <a href="/search/?q={{ query }}">{{ query }}</a></h6>
+  <h2>Relevant Books</h2>
+
+    <div class="row">
+        {% for book in relevant %}
+        <div class="col">
+          <br> 
+          {% if book.offer_link %}
+          <div class="book-card card border-success text-center" style="width:10rem">
+          {% else %}
+          <div class="book-card card text-center" style="width:10rem">
+          {% endif %}
+              <a href="#" data-toggle="modal" data-target="#item{{forloop.counter}}">
+                  <img class="card-img-top" src="{{ book.image }}" alt="book" height="250px">
+              </a>
+
+              <div class="modal fade" id="item{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                          <div class="modal-body">
+                              <div class="row">
+                                  <div class="col-md-4">
+                                      <img class="img-thumbnail" src="{{ book.image }}" height="300px" width="250px">
+                                  </div>
+                                  <div class="col-md-8">
+                                      <h4 id="exampleModalLongTitle">{{book.title}}</h4>
+                                      <h5 class="text-muted">{{ book.author }}</h5>
+
+                                      <dl class="row">
+                                          <dt class="col-sm-3">Price: </dt>
+                                          <dd class="col-sm-9 book-price">₹ {{ book.price }}</dd>
+                                          <dt class="col-sm-3">Details: </dt>
+                                          <dd class="col-sm-9">{{ book.ISBN|safe }}</dd>
+                                          <dt class="col-sm-3">Provider: </dt>
+                                          <dd class="col-sm-9">
+                                              <img src="{{ book.provider }}" height="50px" width="120px">
+                                          </dd>
+                                      </dl>
+
+                                      <a class="btn btn-primary" href="{{ book.link }}" target="_blank" role="button">Get
+                                          this Book!</a> {% if book.offer_link %}
+                                      <a class="btn btn-success" href="{{ book.offer_link }}" target="_blank" role="button">Offers</a>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="card-body">
+                  <h5 class="card-title">
+                      Cost: ₹{{ book.price }}
+                  </h5>
+                  <a href="{{ book.link }}" target="_blank"><img src="{{ book.provider }}" height="30px" width="80px"></a>
+              </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+  </div>
+</div>
+
+<br>
+<hr>
+
+<div class="container">
+    <h2>Related Books</h2>
 
     <div class="row">
         {% for book in all %}
         <div class="col">
-            <br> {% if book.offer_link %}
-            <div class="card border-success text-center" style="width:10rem">
-                {% else %}
-                <div class="card text-center" style="width:10rem">
-                    {% endif %}
+            <br> 
+            {% if book.offer_link %}
+            <div class="book-card card border-success text-center" style="width:10rem">
+            {% else %}
+            <div class="book-card card text-center" style="width:10rem">
+            {% endif %}
                     <a href="#" data-toggle="modal" data-target="#item{{forloop.counter}}">
                         <img class="card-img-top" src="{{ book.image }}" alt="book" height="250px">
                     </a>
@@ -67,7 +135,7 @@
 
                                             <dl class="row">
                                                 <dt class="col-sm-3">Price: </dt>
-                                                <dd class="col-sm-9">₹ {{ book.price }}</dd>
+                                                <dd class="col-sm-9 book-price">₹ {{ book.price }}</dd>
                                                 <dt class="col-sm-3">Details: </dt>
                                                 <dd class="col-sm-9">{{ book.ISBN|safe }}</dd>
                                                 <dt class="col-sm-3">Provider: </dt>
@@ -107,13 +175,33 @@
 // code for validating the range input of prices
 // min price value should be less than or equal max price value
 
-var minPriceRangeElem = document.getElementById('minPrice');
-var maxPriceRangeElem = document.getElementById('maxPrice');
+var minPriceRangeElem = document.getElementById('minPriceInput');
+var maxPriceRangeElem = document.getElementById('maxPriceInput');
 var minPriceLabel = document.getElementById('minPriceLabel');
 var maxPriceLabel = document.getElementById('maxPriceLabel');
 
 minPriceLabel.innerHTML = 'Min. Price ₹' + minPriceRangeElem.value + ':';
 maxPriceLabel.innerHTML = 'Max. Price ₹' + maxPriceRangeElem.value + ':';
+
+window.addEventListener('load', (ev) => {
+  var minPrice = Number(minPriceRangeElem.value);
+  var maxPrice = Number(maxPriceRangeElem.value);
+  updateVisibleBooks(minPrice, maxPrice);
+});
+
+function updateVisibleBooks(minPrice, maxPrice) {
+  var booksCards = document.querySelectorAll('.book-card');
+  for (card of booksCards) {
+    var bookPriceElem = card.querySelector('.book-price');
+    var price = Number(bookPriceElem.innerText.replace('₹', ''));
+
+    if (minPrice <= price && price <= maxPrice) {
+      card.style.visibility = 'visible';
+    } else {
+      card.style.visibility = 'hidden';
+    }
+  }
+};
 
 minPriceRangeElem.addEventListener('change', (ev) => {
   var minPrice = Number(minPriceRangeElem.value);
@@ -121,7 +209,9 @@ minPriceRangeElem.addEventListener('change', (ev) => {
   if (minPrice > maxPrice) {
     minPriceRangeElem.value = maxPriceRangeElem.value;
   }
-  minPriceLabel.innerHTML = 'Min. Price ₹' + minPriceRangeElem.value;
+  minPriceLabel.innerHTML = 'Min. Price ₹' + minPriceRangeElem.value + ':';
+
+  updateVisibleBooks(minPrice, maxPrice);
 });
 
 maxPriceRangeElem.addEventListener('change', (ev) => {
@@ -130,7 +220,9 @@ maxPriceRangeElem.addEventListener('change', (ev) => {
   if (minPrice > maxPrice) {
     maxPriceRangeElem.value = minPriceRangeElem.value;
   }
-  maxPriceLabel.innerHTML = 'Max. Price ₹' + maxPriceRangeElem.value;
+  maxPriceLabel.innerHTML = 'Max. Price ₹' + maxPriceRangeElem.value + ':';
+
+  updateVisibleBooks(minPrice, maxPrice);
 });
 </script>
 {% endblock %}
