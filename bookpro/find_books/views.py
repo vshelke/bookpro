@@ -1,5 +1,6 @@
 import logging
 import time
+import hashlib
 from django.shortcuts import render
 from find_books.integrations import Amazon, Flipkart, Infibeam, BooksMela ,Snapdeal,Bookswagon
 
@@ -64,6 +65,8 @@ def search(request):
     for thread in threads:
         items = validate_price(thread.items)
         if items:
+            for item in items:
+                item['hash'] = hashlib.md5(item['link'].encode('utf-8')).hexdigest()
             all_items.extend(items)
             relevant.extend(items[:2])
 
