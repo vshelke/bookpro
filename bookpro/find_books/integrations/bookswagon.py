@@ -80,14 +80,9 @@ class Bookswagon(Thread):
         if(self.check(price)):
             data['price'] = float(price.text[3:].replace(',', ''))
         if(self.check(img)):
-            r = requests.head(img['src'])
-            if(r.status_code != requests.codes.ok):
-                data['image'] = "https://d2g9wbak88g7ch.cloudfront.net/productimages/mainimages/notavailable.gif"
-            else:
-                data['image'] = img['src']
+            data['image'] = img['src']
         else:
-            data['image'] = "https://d2g9wbak88g7ch.cloudfront.net/productimages/mainimages/notavailable.gif"
-
+            data['image'] = "/static/notavailable.gif"
         return data
 
     def run(self):
