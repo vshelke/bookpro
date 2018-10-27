@@ -35,7 +35,15 @@
     </div>
 </nav>
 <br>
+<script>
 
+function handleImage(image) {
+    image.onerror = null;
+    image.src = "/static/notavailable.gif";
+    return true;
+}
+
+</script>
 <div class="container">
   <h6>Showing results for: <a href="/search/?q={{ query }}">{{ query }}</a></h6>
   <h2>Relevant Books</h2>
@@ -50,7 +58,7 @@
           <div class="book-card card text-center" style="width:10rem">
           {% endif %}
               <a href="#" data-toggle="modal" data-target="#item{{ book.hash }}">
-                  <img class="card-img-top" src="{{ book.image }}" alt="book" height="250px">
+                  <img class="card-img-top" src="{{ book.image }}" onerror="handleImage(this);" alt="book" height="250px">
               </a>
 
               <div class="modal fade" id="item{{ book.hash }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -60,7 +68,7 @@
                           <div class="modal-body">
                               <div class="row">
                                   <div class="col-md-4">
-                                      <img class="img-thumbnail" src="{{ book.image }}" height="300px" width="250px">
+                                      <img class="img-thumbnail" src="{{ book.image }}" onerror="handleImage(this);" height="300px" width="250px">
                                   </div>
                                   <div class="col-md-8">
                                       <h4 id="exampleModalLongTitle">{{book.title}}</h4>
@@ -117,7 +125,7 @@
             <div class="book-card card text-center" style="width:10rem">
             {% endif %}
                     <a href="#" data-toggle="modal" data-target="#item{{ book.hash }}">
-                        <img class="card-img-top" src="{{ book.image }}" alt="book" height="250px">
+                        <img class="card-img-top" src="{{ book.image }}" onerror="handleImage(this);" alt="book" height="250px">
                     </a>
 
                     <div class="modal fade" id="item{{ book.hash }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -127,7 +135,7 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <img class="img-thumbnail" src="{{ book.image }}" height="300px" width="250px">
+                                            <img class="img-thumbnail" src="{{ book.image }}" onerror="handleImage(this);" height="300px" width="250px">
                                         </div>
                                         <div class="col-md-8">
                                             <h4 id="exampleModalLongTitle">{{book.title}}</h4>
