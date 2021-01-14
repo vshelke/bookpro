@@ -2,7 +2,7 @@ beautifulsoup4==4.6.3
 bs4==0.0.1
 certifi==2018.10.15
 chardet==3.0.4
-Django==2.1.2
+Django==2.2.13
 gunicorn==19.9.0
 idna==2.7
 pytz==2018.5
